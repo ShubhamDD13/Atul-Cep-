@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Founder Administrative Portal | Jeevan Ankur Seva Foundation</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/logo.png">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ========================================================
+     ADMIN PORTAL - MATCHING JEEVAN ANKUR COLOR PALETTE & UI
+     ======================================================== */
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* Admin Top Bar */
+  .admin-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    min-height: 72px;
+  }
+  .founder-badge {
+    background: var(--marigold);
+    color: #2A1A00;
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    margin-left: 0.6rem;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .admin-user-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .user-badge-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .user-badge-chip span.avatar {
+    width: 24px;
+    height: 24px;
+    background: var(--leaf);
+    color: #fff;
+    border-radius: 50%;
+    display: inline-grid;
+    place-items: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  /* Admin Hero Section */
+  .admin-hero {
+    background: var(--hero-bg);
+    color: var(--hero-ink);
+    padding: clamp(2rem, 5vw, 3.2rem) 0;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--leaf-2);
+  }
+  .admin-hero::after {
+    content: "";
+    position: absolute;
+    right: -60px;
+    bottom: -80px;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    border: 3px solid var(--marigold);
+    opacity: 0.25;
+    pointer-events: none;
+  }
+  .admin-hero .wrap {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .admin-hero h1 {
+    font-size: clamp(2rem, 4.5vw, 2.9rem);
+    margin-bottom: 0.4rem;
+  }
+  .admin-hero .hi {
+    color: var(--marigold);
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  /* Stat Metric Cards */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem;
+    margin: -1.8rem 0 2.2rem;
+    position: relative;
+    z-index: 2;
+  }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 1.4rem;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.04);
+    display: grid;
+    gap: 0.6rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.08);
+    border-color: var(--sprout);
+  }
+  .stat-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .stat-ico {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--bg-2);
+    color: var(--leaf);
+    display: grid;
+    place-items: center;
+    font-size: 1.25rem;
+  }
+  .stat-ico.gold {
+    background: color-mix(in srgb, var(--marigold) 20%, transparent);
+    color: #8f5d00;
+  }
+  .stat-ico.leaf {
+    background: color-mix(in srgb, var(--sprout) 25%, transparent);
+    color: var(--leaf);
+  }
+  .stat-card .label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .stat-card .num {
+    font-family: var(--serif);
+    font-size: 2.3rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .stat-card .desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  /* Analytics Visuals Grid */
+  .visuals-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 1.4rem;
+    margin-bottom: 2.2rem;
+  }
+  @media (max-width: 900px) {
+    .visuals-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .admin-panel {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 1.6rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.03);
+  }
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1.3rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .panel-header h2 {
+    font-size: 1.3rem;
+    margin: 0;
+  }
+  .panel-header small {
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  /* Page Traffic Progress Bars */
+  .bar-list {
+    display: grid;
+    gap: 1rem;
+  }
+  .bar-row {
+    display: grid;
+    gap: 0.4rem;
+  }
+  .bar-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.92rem;
+    font-weight: 500;
+  }
+  .bar-rail {
+    height: 11px;
+    background: var(--bg-2);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .bar-leaf {
+    height: 100%;
+    background: linear-gradient(90deg, var(--leaf), var(--sprout));
+    border-radius: 999px;
+    transition: width 0.7s ease;
+  }
+
+  /* Devices Box */
+  .device-boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.9rem;
+    margin-bottom: 1.4rem;
+  }
+  .dev-card {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 1rem 0.6rem;
+    text-align: center;
+  }
+  .dev-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.2rem;
+  }
+  .dev-count {
+    font-family: var(--serif);
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .dev-title {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  /* Tab Navigation */
+  .nav-tabs {
+    display: flex;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .tab-pill {
+    background: var(--card);
+    border: 1.5px solid var(--line);
+    color: var(--ink);
+    padding: 0.65rem 1.25rem;
+    border-radius: 999px;
+    font: 600 0.95rem var(--sans);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .tab-pill:hover {
+    border-color: var(--leaf);
+    background: var(--bg-2);
+  }
+  .tab-pill.active {
+    background: var(--leaf);
+    color: #fff;
+    border-color: var(--leaf);
+    box-shadow: 0 4px 14px rgba(31, 75, 63, 0.2);
+  }
+  .tab-pill .count {
+    background: rgba(0,0,0,0.1);
+    color: inherit;
+    font-size: 0.78rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+  }
+  .tab-pill.active .count {
+    background: rgba(255,255,255,0.25);
+    color: #fff;
+  }
+
+  /* Action & Filter Toolbar (NO CSV BUTTON) */
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.3rem;
+  }
+  .toolbar-left {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    align-items: center;
+    flex: 1;
+  }
+  .search-input {
+    font: inherit;
+    font-size: 0.92rem;
+    padding: 0.6rem 1rem;
+    border-radius: 12px;
+    border: 1.5px solid var(--line);
+    background: var(--card);
+    color: var(--ink);
+    min-width: 250px;
+    max-width: 380px;
+    flex: 1;
+  }
+  .search-input:focus {
+    border-color: var(--leaf);
+    outline: 3px solid color-mix(in srgb, var(--marigold) 60%, transparent);
+  }
+  .select-box {
+    font: inherit;
+    font-size: 0.92rem;
+    padding: 0.6rem 0.9rem;
+    border-radius: 12px;
+    border: 1.5px solid var(--line);
+    background: var(--card);
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .btn-mini {
+    font: 600 0.88rem var(--sans);
+    padding: 0.6rem 1.05rem;
+    border-radius: 12px;
+    border: 1.5px solid var(--line);
+    background: var(--card);
+    color: var(--ink);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.18s;
+  }
+  .btn-mini:hover {
+    background: var(--bg-2);
+    border-color: var(--leaf);
+  }
+  .btn-mini.danger {
+    color: #9b1c1c;
+    border-color: #f8b4b4;
+    background: #fff;
+  }
+  .btn-mini.danger:hover {
+    background: #fdf2f2;
+    border-color: #e02424;
+  }
+
+  /* Data Table */
+  .table-box {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+  }
+  .table-scroll {
+    width: 100%;
+    overflow-x: auto;
+  }
+  table.site-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    text-align: left;
+  }
+  table.site-table th {
+    background: var(--bg-2);
+    color: var(--muted);
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.9rem 1.1rem;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  table.site-table td {
+    padding: 0.95rem 1.1rem;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    vertical-align: middle;
+  }
+  table.site-table tr:last-child td {
+    border-bottom: none;
+  }
+  table.site-table tr:hover td {
+    background: color-mix(in srgb, var(--bg-2) 40%, transparent);
+  }
+
+  /* Tags & Badges */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+  .badge.page {
+    background: color-mix(in srgb, var(--sprout) 22%, transparent);
+    color: #174220;
+    border: 1px solid color-mix(in srgb, var(--sprout) 40%, transparent);
+  }
+  .badge.device {
+    background: var(--bg-2);
+    color: var(--leaf);
+    border: 1px solid var(--line);
+  }
+  .badge.gold {
+    background: color-mix(in srgb, var(--marigold) 22%, transparent);
+    color: var(--marigold-ink);
+    border: 1px solid color-mix(in srgb, var(--marigold) 40%, transparent);
+  }
+  .badge.user {
+    background: #eef5fc;
+    color: #1a568c;
+    border: 1px solid #d0e4f7;
+  }
+  .empty-row {
+    text-align: center;
+    padding: 3.5rem 1rem;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<!-- Header (Matching main website navigation design) -->
+<header class="site">
+  <div class="wrap admin-bar">
+    <a class="brand" href="index.html" aria-label="Jeevan Ankur Seva Foundation">
+      <span><img src="images/logo.png" alt="Jeevan Ankur Logo" width="48" height="48"></span>
+      <span>
+        <b>Jeevan Ankur</b>
+        <small>Seva Foundation <span class="founder-badge">Founder Portal</span></small>
+      </span>
+    </a>
+
+    <div class="admin-user-nav">
+      <a href="index.html" class="btn ghost" style="border-color:var(--line); color:var(--ink); padding:0.55rem 1.1rem; font-size:0.9rem">
+        ← View Website
+      </a>
+      <div class="user-badge-chip">
+        <span class="avatar">👑</span>
+        <span id="founderNavName">Founder / Admin</span>
+      </div>
+      <button type="button" class="btn solid" style="padding:0.55rem 1.1rem; font-size:0.9rem" onclick="logoutAdmin()">
+        Sign Out
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero Section with Brand Forest Green and Marigold -->
+<section class="admin-hero">
+  <div class="wrap">
+    <div>
+      <div class="hi" lang="hi">नमस्ते &bull; Welcome back</div>
+      <h1>Administrative Dashboard</h1>
+      <p style="margin:0; opacity:0.9; max-width:62ch">
+        Live visitor tracking, community outreach metrics, and resident support inquiries for Jeevan Ankur Seva Foundation.
+      </p>
+    </div>
+    <div>
+      <button type="button" class="btn primary" onclick="loadDashboardData()" style="display:inline-flex; align-items:center; gap:0.5rem">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.19"/></svg>
+        Refresh Real-Time Data
+      </button>
+    </div>
+  </div>
+</section>
+
+<main>
+<div class="wrap" style="padding-bottom: 4rem;">
+
+  <!-- Metric Statistics Cards -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-head">
+        <span class="label">Total Page Views</span>
+        <div class="stat-ico">👁️</div>
+      </div>
+      <div class="num" id="statPageViews">0</div>
+      <p class="desc">Total visits &amp; pages loaded</p>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-head">
+        <span class="label">Unique Visitors</span>
+        <div class="stat-ico gold">👥</div>
+      </div>
+      <div class="num" id="statUniqueVisitors">0</div>
+      <p class="desc">Distinct individual devices</p>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-head">
+        <span class="label">Visits Today</span>
+        <div class="stat-ico leaf">📅</div>
+      </div>
+      <div class="num" id="statTodayVisits">0</div>
+      <p class="desc">Activity recorded today</p>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-head">
+        <span class="label">Registered Users</span>
+        <div class="stat-ico gold">👤</div>
+      </div>
+      <div class="num" id="statUsers">0</div>
+      <p class="desc">Supporters &amp; registered accounts</p>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-head">
+        <span class="label">Inquiries Received</span>
+        <div class="stat-ico">💬</div>
+      </div>
+      <div class="num" id="statContacts">0</div>
+      <p class="desc">Messages from contact form</p>
+    </div>
+  </div>
+
+  <!-- Visual Analytics Panels (Pages breakdown & Device distribution) -->
+  <div class="visuals-grid">
+    <div class="admin-panel">
+      <div class="panel-header">
+        <h2>Most Visited Pages</h2>
+        <small>Visitor activity across sections</small>
+      </div>
+      <div class="bar-list" id="pageBreakdownContainer">
+        <div style="color:var(--muted); font-size:0.92rem">Loading page statistics...</div>
+      </div>
+    </div>
+
+    <div class="admin-panel">
+      <div class="panel-header">
+        <h2>Device &amp; Technology</h2>
+        <small>Visitor hardware &amp; browsers</small>
+      </div>
+
+      <div class="device-boxes">
+        <div class="dev-card">
+          <div class="dev-icon">💻</div>
+          <div class="dev-count" id="countDesktop">0</div>
+          <div class="dev-title">Desktop</div>
+        </div>
+        <div class="dev-card">
+          <div class="dev-icon">📱</div>
+          <div class="dev-count" id="countMobile">0</div>
+          <div class="dev-title">Mobile</div>
+        </div>
+        <div class="dev-card">
+          <div class="dev-icon">📟</div>
+          <div class="dev-count" id="countTablet">0</div>
+          <div class="dev-title">Tablet</div>
+        </div>
+      </div>
+
+      <div>
+        <b style="font-size:0.85rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.04em">Web Browsers Tracked</b>
+        <div id="browserPillsContainer" style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.6rem">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section Tabs (Visitors, Users, Inquiries, Settings) -->
+  <div class="nav-tabs">
+    <button type="button" class="tab-pill active" id="tabBtnVisitors" onclick="showTab('visitors')">
+      👥 Live Visitor Logs <span class="count" id="badgeVisitorCount">0</span>
+    </button>
+    <button type="button" class="tab-pill" id="tabBtnUsers" onclick="showTab('users')">
+      👤 Registered Users <span class="count" id="badgeUsersCount">0</span>
+    </button>
+    <button type="button" class="tab-pill" id="tabBtnContacts" onclick="showTab('contacts')">
+      💬 Messages &amp; Inquiries <span class="count" id="badgeContactsCount">0</span>
+    </button>
+    <button type="button" class="tab-pill" id="tabBtnSettings" onclick="showTab('settings')">
+      ⚙️ Founder Settings
+    </button>
+  </div>
+
+  <!-- TAB 1: VISITOR LOGS -->
+  <div id="tabContentVisitors">
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <input type="text" id="visitorSearch" class="search-input" placeholder="Search IP, browser, page, referrer..." oninput="onSearchInput()">
+        <select id="deviceFilter" class="select-box" onchange="filterVisitors()">
+          <option value="">All Devices</option>
+          <option value="Desktop">Desktop Only</option>
+          <option value="Mobile">Mobile Only</option>
+          <option value="Tablet">Tablet Only</option>
+        </select>
+      </div>
+      <div>
+        <button type="button" class="btn-mini danger" onclick="clearVisitorLogs()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          Clear Visitor Logs
+        </button>
+      </div>
+    </div>
+
+    <div class="table-box">
+      <div class="table-scroll">
+        <table class="site-table">
+          <thead>
+            <tr>
+              <th>Date &amp; Time</th>
+              <th>IP &amp; Visitor ID</th>
+              <th>Page Visited</th>
+              <th>Device &amp; OS</th>
+              <th>Browser</th>
+              <th>Screen</th>
+              <th>Referrer</th>
+              <th>User Account</th>
+            </tr>
+          </thead>
+          <tbody id="visitorsTbody">
+            <tr>
+              <td colspan="8" class="empty-row">Loading visitor data...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: REGISTERED USERS -->
+  <div id="tabContentUsers" style="display: none;">
+    <div class="table-box">
+      <div class="table-scroll">
+        <table class="site-table">
+          <thead>
+            <tr>
+              <th>Full Name</th>
+              <th>Email Address</th>
+              <th>Phone Number</th>
+              <th>Role</th>
+              <th>Member Since</th>
+              <th>Last Login</th>
+            </tr>
+          </thead>
+          <tbody id="usersTbody">
+            <tr>
+              <td colspan="6" class="empty-row">Loading user list...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: CONTACT MESSAGES -->
+  <div id="tabContentContacts" style="display: none;">
+    <div class="table-box">
+      <div class="table-scroll">
+        <table class="site-table">
+          <thead>
+            <tr>
+              <th>Received Date</th>
+              <th>Sender Name</th>
+              <th>Contact Phone/Email</th>
+              <th>Inquiry Message</th>
+            </tr>
+          </thead>
+          <tbody id="contactsTbody">
+            <tr>
+              <td colspan="4" class="empty-row">Loading inquiries...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: FOUNDER SETTINGS -->
+  <div id="tabContentSettings" style="display: none;">
+    <div class="admin-panel" style="max-width: 580px;">
+      <div class="panel-header">
+        <h2>Founder Account Details</h2>
+        <small>Update profile or password</small>
+      </div>
+
+      <form id="founderSettingsForm" onsubmit="updateFounderProfile(event)" style="border:none; padding:0; background:none; display:grid; gap:1.1rem">
+        <label>Founder Name
+          <input type="text" id="settingName" required>
+        </label>
+        <label>Contact Phone
+          <input type="tel" id="settingPhone">
+        </label>
+
+        <div style="border-top:1px dashed var(--line); margin:0.4rem 0"></div>
+
+        <p style="font-size:0.92rem; color:var(--muted); margin:0">Change Administrator Password (optional):</p>
+        <label>Current Password
+          <input type="password" id="settingOldPass" placeholder="Required only if setting new password">
+        </label>
+        <label>New Password
+          <input type="password" id="settingNewPass" minlength="6" placeholder="At least 6 characters">
+        </label>
+
+        <button type="submit" class="btn solid" style="width:100%; padding:0.85rem">
+          Save Settings
+        </button>
+
+        <div id="settingsFeedback" style="display:none; padding:0.75rem 1rem; border-radius:10px; font-size:0.92rem"></div>
+      </form>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <b style="font-family:var(--serif); font-size:1.2rem">Jeevan Ankur Seva Foundation</b>
+      <p>Administrative Control Center &bull; Confidential &amp; Protected</p>
+    </div>
+    <p class="copy" style="margin-top:1rem">&copy; <span id="year">2026</span> Jeevan Ankur Seva Foundation. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  let token = localStorage.getItem('ja_token');
+  let rawVisitors = [];
+  let searchTimer = null;
+
+  async function checkFounderAuth() {
+    if (!token) {
+      window.location.replace('login.html');
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/auth/me', {
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      if (!res.ok) throw new Error('Not authorized');
+
+      const data = await res.json();
+      if (data.user.role !== 'founder') {
+        alert('Access denied: You must be logged in as Founder / Admin to view this page.');
+        window.location.replace('index.html');
+        return;
+      }
+
+      document.getElementById('founderNavName').textContent = data.user.name || 'Founder';
+      document.getElementById('settingName').value = data.user.name || '';
+      document.getElementById('settingPhone').value = data.user.phone || '';
+
+      loadDashboardData();
+    } catch (err) {
+      localStorage.removeItem('ja_token');
+      localStorage.removeItem('ja_user');
+      window.location.replace('login.html');
+    }
+  }
+
+  async function loadDashboardData() {
+    await Promise.all([
+      fetchStats(),
+      fetchVisitors(),
+      fetchUsers(),
+      fetchContacts()
+    ]);
+  }
+
+  async function fetchStats() {
+    try {
+      const res = await fetch('/api/admin/stats', {
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      if (!res.ok) return;
+      const data = await res.json();
+
+      document.getElementById('statPageViews').textContent = data.totalPageViews;
+      document.getElementById('statUniqueVisitors').textContent = data.totalUniqueVisitors;
+      document.getElementById('statTodayVisits').textContent = data.todayVisits;
+      document.getElementById('statUsers').textContent = data.totalUsers;
+      document.getElementById('statContacts').textContent = data.totalContacts;
+
+      document.getElementById('countDesktop').textContent = data.devices.Desktop || 0;
+      document.getElementById('countMobile').textContent = data.devices.Mobile || 0;
+      document.getElementById('countTablet').textContent = data.devices.Tablet || 0;
+
+      // Page breakdown
+      const container = document.getElementById('pageBreakdownContainer');
+      container.innerHTML = '';
+      const totalHits = data.totalPageViews || 1;
+      const pages = Object.entries(data.pages || {}).sort((a,b) => b[1] - a[1]);
+
+      if (pages.length === 0) {
+        container.innerHTML = '<div style="color:var(--muted); font-size:0.92rem">No visits logged yet.</div>';
+      } else {
+        pages.slice(0, 6).forEach(([pageName, count]) => {
+          const pct = Math.round((count / totalHits) * 100);
+          const row = document.createElement('div');
+          row.className = 'bar-row';
+          row.innerHTML = `
+            <div class="bar-info">
+              <span><b>${escapeHtml(pageName)}</b></span>
+              <span style="color:var(--muted)">${count} views &bull; ${pct}%</span>
+            </div>
+            <div class="bar-rail">
+              <div class="bar-leaf" style="width: ${pct}%"></div>
+            </div>
+          `;
+          container.appendChild(row);
+        });
+      }
+
+      // Browsers
+      const browserBox = document.getElementById('browserPillsContainer');
+      browserBox.innerHTML = '';
+      Object.entries(data.browsers || {}).forEach(([browserName, count]) => {
+        const pill = document.createElement('span');
+        pill.className = 'badge device';
+        pill.textContent = `${browserName}: ${count}`;
+        browserBox.appendChild(pill);
+      });
+
+    } catch (err) {
+      console.error('Error fetching statistics:', err);
+    }
+  }
+
+  async function fetchVisitors() {
+    try {
+      const res = await fetch('/api/admin/visitors?limit=300', {
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      if (!res.ok) return;
+      const data = await res.json();
+      rawVisitors = data.visitors || [];
+      document.getElementById('badgeVisitorCount').textContent = data.total || 0;
+      renderVisitorsTable(rawVisitors);
+    } catch (err) {
+      console.error('Error fetching visitors:', err);
+    }
+  }
+
+  function renderVisitorsTable(list) {
+    const tbody = document.getElementById('visitorsTbody');
+    if (!list || list.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="8" class="empty-row">No visitors matched your search.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = '';
+    list.forEach(v => {
+      const tr = document.createElement('tr');
+      const timeStr = v.timestamp ? new Date(v.timestamp).toLocaleString('en-IN', {
+        day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
+      }) : 'Just now';
+
+      const devIcon = v.device === 'Mobile' ? '📱' : v.device === 'Tablet' ? '📟' : '💻';
+
+      tr.innerHTML = `
+        <td style="white-space:nowrap; font-size:0.86rem; color:var(--muted)">${timeStr}</td>
+        <td>
+          <code style="font-weight:700; font-size:0.88rem; color:var(--ink)">${escapeHtml(v.ip || '127.0.0.1')}</code>
+          <div style="font-size:0.75rem; color:var(--muted)">${escapeHtml((v.visitorId || '').slice(0, 12))}</div>
+        </td>
+        <td><span class="badge page">${escapeHtml(v.page || '/')}</span></td>
+        <td><span class="badge device">${devIcon} ${escapeHtml(v.device || 'Desktop')} (${escapeHtml(v.os || 'Windows')})</span></td>
+        <td style="font-size:0.88rem">${escapeHtml(v.browser || 'Browser')}</td>
+        <td style="font-size:0.85rem; color:var(--muted)">${escapeHtml(v.screen || '—')}</td>
+        <td style="font-size:0.84rem; color:var(--muted); max-width:130px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" title="${escapeHtml(v.referrer || '')}">
+          ${escapeHtml(v.referrer || 'Direct')}
+        </td>
+        <td>
+          ${v.userEmail ? `<span class="badge user">${escapeHtml(v.userEmail)}</span>` : '<span style="color:var(--muted); font-size:0.82rem">—</span>'}
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function onSearchInput() {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(filterVisitors, 200);
+  }
+
+  function filterVisitors() {
+    const q = (document.getElementById('visitorSearch').value || '').trim().toLowerCase();
+    const dev = document.getElementById('deviceFilter').value;
+
+    let res = rawVisitors;
+    if (dev) {
+      res = res.filter(v => (v.device || '').toLowerCase() === dev.toLowerCase());
+    }
+    if (q) {
+      res = res.filter(v => 
+        (v.ip || '').toLowerCase().includes(q) ||
+        (v.page || '').toLowerCase().includes(q) ||
+        (v.browser || '').toLowerCase().includes(q) ||
+        (v.os || '').toLowerCase().includes(q) ||
+        (v.referrer || '').toLowerCase().includes(q) ||
+        (v.userEmail || '').toLowerCase().includes(q)
+      );
+    }
+
+    renderVisitorsTable(res);
+  }
+
+  async function fetchUsers() {
+    try {
+      const res = await fetch('/api/admin/users', {
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      if (!res.ok) return;
+      const data = await res.json();
+      const users = data.users || [];
+      document.getElementById('badgeUsersCount').textContent = users.length;
+
+      const tbody = document.getElementById('usersTbody');
+      if (users.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="empty-row">No users registered yet.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = '';
+      users.forEach(u => {
+        const tr = document.createElement('tr');
+        const joined = u.createdAt ? new Date(u.createdAt).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' }) : 'Initial';
+        const lastSeen = u.lastLogin ? new Date(u.lastLogin).toLocaleString('en-IN', { day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit', hour12:true }) : 'Never';
+        const roleBadge = u.role === 'founder' ? '<span class="badge gold">👑 Founder / Admin</span>' : '<span class="badge user">User</span>';
+
+        tr.innerHTML = `
+          <td><b>${escapeHtml(u.name)}</b></td>
+          <td>${escapeHtml(u.email)}</td>
+          <td>${escapeHtml(u.phone || '—')}</td>
+          <td>${roleBadge}</td>
+          <td style="font-size:0.86rem">${joined}</td>
+          <td style="font-size:0.86rem; color:var(--muted)">${lastSeen}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    } catch (err) {
+      console.error('Error fetching users:', err);
+    }
+  }
+
+  async function fetchContacts() {
+    try {
+      const res = await fetch('/api/admin/contacts', {
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      if (!res.ok) return;
+      const data = await res.json();
+      const contacts = data.contacts || [];
+      document.getElementById('badgeContactsCount').textContent = contacts.length;
+
+      const tbody = document.getElementById('contactsTbody');
+      if (contacts.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" class="empty-row">No inquiries received yet.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = '';
+      contacts.forEach(c => {
+        const tr = document.createElement('tr');
+        const dt = c.timestamp ? new Date(c.timestamp).toLocaleString('en-IN', { day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit', hour12:true }) : '';
+        tr.innerHTML = `
+          <td style="white-space:nowrap; font-size:0.86rem; color:var(--muted)">${dt}</td>
+          <td><b>${escapeHtml(c.name)}</b></td>
+          <td>${escapeHtml(c.contact)}</td>
+          <td style="max-width:350px; word-break:break-word">${escapeHtml(c.message)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    } catch (err) {
+      console.error('Error fetching contacts:', err);
+    }
+  }
+
+  async function clearVisitorLogs() {
+    if (!confirm('Are you sure you want to permanently clear all recorded visitor logs?')) return;
+    try {
+      const res = await fetch('/api/admin/visitors', {
+        method: 'DELETE',
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      if (res.ok) {
+        alert('Visitor logs have been cleared.');
+        loadDashboardData();
+      }
+    } catch (err) {
+      alert('Error clearing logs: ' + err.message);
+    }
+  }
+
+  async function updateFounderProfile(e) {
+    e.preventDefault();
+    const name = document.getElementById('settingName').value.trim();
+    const phone = document.getElementById('settingPhone').value.trim();
+    const oldPassword = document.getElementById('settingOldPass').value;
+    const newPassword = document.getElementById('settingNewPass').value;
+    const box = document.getElementById('settingsFeedback');
+
+    try {
+      const res = await fetch('/api/auth/update-profile', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({ name, phone, oldPassword, newPassword })
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to update profile');
+
+      box.style.display = 'block';
+      box.style.background = '#f3faf7';
+      box.style.color = '#0e5a3c';
+      box.style.border = '1px solid #a3e6cd';
+      box.textContent = 'Settings updated successfully!';
+
+      document.getElementById('founderNavName').textContent = name;
+      document.getElementById('settingOldPass').value = '';
+      document.getElementById('settingNewPass').value = '';
+
+      setTimeout(() => { box.style.display = 'none'; }, 4000);
+    } catch (err) {
+      box.style.display = 'block';
+      box.style.background = '#fdf2f2';
+      box.style.color = '#9b1c1c';
+      box.style.border = '1px solid #f8b4b4';
+      box.textContent = err.message;
+    }
+  }
+
+  function showTab(t) {
+    document.getElementById('tabContentVisitors').style.display = t === 'visitors' ? 'block' : 'none';
+    document.getElementById('tabContentUsers').style.display = t === 'users' ? 'block' : 'none';
+    document.getElementById('tabContentContacts').style.display = t === 'contacts' ? 'block' : 'none';
+    document.getElementById('tabContentSettings').style.display = t === 'settings' ? 'block' : 'none';
+
+    document.querySelectorAll('.tab-pill').forEach(btn => btn.classList.remove('active'));
+    if (t === 'visitors') document.getElementById('tabBtnVisitors').classList.add('active');
+    if (t === 'users') document.getElementById('tabBtnUsers').classList.add('active');
+    if (t === 'contacts') document.getElementById('tabBtnContacts').classList.add('active');
+    if (t === 'settings') document.getElementById('tabBtnSettings').classList.add('active');
+  }
+
+  function logoutAdmin() {
+    localStorage.removeItem('ja_token');
+    localStorage.removeItem('ja_user');
+    window.location.replace('login.html');
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  document.addEventListener('DOMContentLoaded', checkFounderAuth);
+</script>
+</body>
+</html>

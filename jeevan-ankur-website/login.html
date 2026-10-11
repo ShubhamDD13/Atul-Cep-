@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Login | Jeevan Ankur Seva Foundation</title>
+<meta name="description" content="Sign in to Jeevan Ankur Seva Foundation. Portal access for visitors, supporters, and administrative founder.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Hind:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/logo.png">
+<link rel="stylesheet" href="style.css">
+<style>
+  .auth-section {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(2.5rem, 6vw, 4.5rem) 1rem;
+  }
+  .auth-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: clamp(1.8rem, 4vw, 2.6rem);
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 16px 36px rgba(0,0,0,0.06);
+  }
+  .auth-tabs {
+    display: flex;
+    gap: 0.5rem;
+    background: var(--bg-2);
+    padding: 0.35rem;
+    border-radius: 999px;
+    margin-bottom: 2rem;
+  }
+  .auth-tab-btn {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    font: 600 0.98rem var(--sans);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .auth-tab-btn.active {
+    background: var(--card);
+    color: var(--leaf);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .auth-form {
+    display: grid;
+    gap: 1.2rem;
+  }
+  .form-group {
+    display: grid;
+    gap: 0.4rem;
+  }
+  .form-group label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .form-group input {
+    font: inherit;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    border: 1.5px solid var(--line);
+    background: var(--bg);
+    color: var(--ink);
+    width: 100%;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus {
+    border-color: var(--leaf);
+    outline: 3px solid color-mix(in srgb, var(--marigold) 60%, transparent);
+  }
+  .auth-alert {
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    font-size: 0.93rem;
+    display: none;
+    margin-bottom: 0.5rem;
+  }
+  .auth-alert.error {
+    background: #fdf2f2;
+    color: #9b1c1c;
+    border: 1px solid #f8b4b4;
+    display: block;
+  }
+  .auth-alert.success {
+    background: #f3faf7;
+    color: #0e5a3c;
+    border: 1px solid #a3e6cd;
+    display: block;
+  }
+  .auth-footer {
+    text-align: center;
+    margin-top: 1.2rem;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+  .auth-footer a {
+    color: var(--leaf);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="index.html" aria-label="Jeevan Ankur Seva Foundation, home">
+      <span><img src="images/logo.png" alt="" width="48" height="48"></span>
+      <span><b>Jeevan Ankur</b><small>Seva Foundation</small></span>
+    </a>
+
+    <!-- Mobile menu button -->
+    <input type="checkbox" id="menuToggle" class="menu-toggle" aria-label="Open menu">
+    <label for="menuToggle" class="menu-btn">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </label>
+
+    <nav id="nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="old-age-home.html">Old Age Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="activities.html">Activities</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html" id="navAuthLink" aria-current="page">Login</a></li>
+        <li><a class="cta" href="donate.html">Donate</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="auth-section">
+  <div class="auth-card">
+    <div style="text-align: center; margin-bottom: 1.5rem;">
+      <h1 style="font-size: 1.85rem; margin-bottom: 0.35rem;">Welcome to Jeevan Ankur</h1>
+      <p style="color: var(--muted); font-size: 0.98rem; margin: 0 auto;">Login for supporters, volunteers, and the administrative founder.</p>
+    </div>
+
+    <div class="auth-tabs">
+      <button type="button" class="auth-tab-btn active" id="tabLogin" onclick="switchTab('login')">Sign In</button>
+      <button type="button" class="auth-tab-btn" id="tabRegister" onclick="switchTab('register')">New User Sign Up</button>
+    </div>
+
+    <div id="authAlert" class="auth-alert" role="alert"></div>
+
+    <!-- LOGIN FORM (Both normal user and founder) -->
+    <form id="loginForm" class="auth-form" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label for="loginEmail">Email or ID</label>
+        <input type="text" id="loginEmail" required placeholder="Enter your email or ID" autocomplete="username">
+      </div>
+
+      <div class="form-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" required placeholder="••••••••" autocomplete="current-password">
+      </div>
+
+      <button type="submit" id="loginSubmitBtn" class="btn solid" style="width: 100%; margin-top: 0.4rem; padding: 0.85rem;">
+        Sign In
+      </button>
+    </form>
+
+    <!-- REGISTER FORM (Normal user signup) -->
+    <form id="registerForm" class="auth-form" style="display: none;" onsubmit="handleRegister(event)">
+      <div class="form-group">
+        <label for="regName">Full Name</label>
+        <input type="text" id="regName" required placeholder="Your full name" autocomplete="name">
+      </div>
+
+      <div class="form-group">
+        <label for="regEmail">Email Address</label>
+        <input type="email" id="regEmail" required placeholder="name@example.com" autocomplete="email">
+      </div>
+
+      <div class="form-group">
+        <label for="regPhone">Phone Number</label>
+        <input type="tel" id="regPhone" placeholder="Mobile / WhatsApp number" autocomplete="tel">
+      </div>
+
+      <div class="form-group">
+        <label for="regPassword">Password</label>
+        <input type="password" id="regPassword" required minlength="6" placeholder="At least 6 characters" autocomplete="new-password">
+      </div>
+
+      <button type="submit" id="regSubmitBtn" class="btn solid" style="width: 100%; margin-top: 0.4rem; padding: 0.85rem;">
+        Create User Account
+      </button>
+
+      <p class="auth-footer">
+        Already have an account? <a href="#" onclick="switchTab('login'); return false;">Sign In here</a>
+      </p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <b style="font-family:var(--serif); font-size:1.2rem">Jeevan Ankur Seva Foundation</b>
+      <p>Care, love, dignity and a safe home for senior citizens.</p>
+      <p style="margin-top:.5rem"><a href="tel:+918169615400">8169615400</a> &middot; <a href="mailto:jeevanankursevafoundation@gmail.com" style="overflow-wrap:anywhere">jeevanankursevafoundation@gmail.com</a></p>
+    </div>
+    <div class="foot-links">
+      <p style="margin-bottom:.6rem">Pages</p>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="old-age-home.html">Our Old Age Home</a></li>
+        <li><a href="services.html">Our Services</a></li>
+        <li><a href="activities.html">Activities &amp; Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="donate.html">Donate</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="admin.html">Admin Portal</a></li>
+      </ul>
+    </div>
+    <div>
+      <p style="margin-bottom:.6rem">Follow us &amp; find us</p>
+      <div class="social">
+        <a target="_blank" rel="noopener" aria-label="Instagram: jeevanankur_vridhashram" title="Instagram" href="https://www.instagram.com/jeevanankur_vridhashram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a target="_blank" rel="noopener" aria-label="Location on Google Maps" title="Location" href="https://www.google.com/maps/search/?api=1&amp;query=Jeevan+Ankur+Old+Age+Home+Kamgar+Nagar+Kurla+East+Mumbai+400024"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></a>
+      </div>
+    </div>
+    <p class="copy">&copy; <span id="year">2026</span> Jeevan Ankur Seva Foundation</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  function switchTab(tab) {
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const tabLogin = document.getElementById('tabLogin');
+    const tabRegister = document.getElementById('tabRegister');
+    const alertBox = document.getElementById('authAlert');
+    alertBox.className = 'auth-alert';
+    alertBox.textContent = '';
+
+    if (tab === 'register') {
+      loginForm.style.display = 'none';
+      registerForm.style.display = 'grid';
+      tabLogin.classList.remove('active');
+      tabRegister.classList.add('active');
+    } else {
+      registerForm.style.display = 'none';
+      loginForm.style.display = 'grid';
+      tabRegister.classList.remove('active');
+      tabLogin.classList.add('active');
+    }
+  }
+
+  function showAlert(msg, isError) {
+    const alertBox = document.getElementById('authAlert');
+    alertBox.textContent = msg;
+    alertBox.className = 'auth-alert ' + (isError ? 'error' : 'success');
+  }
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const btn = document.getElementById('loginSubmitBtn');
+
+    btn.disabled = true;
+    btn.textContent = 'Verifying...';
+
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Login failed');
+      }
+
+      // Store auth session
+      localStorage.setItem('ja_token', data.token);
+      localStorage.setItem('ja_user', JSON.stringify(data.user));
+
+      showAlert(`Welcome back, ${data.user.name}! Redirecting...`, false);
+
+      setTimeout(() => {
+        if (data.user.role === 'founder') {
+          window.location.href = 'admin.html';
+        } else {
+          window.location.href = 'index.html?login=success';
+        }
+      }, 700);
+
+    } catch (err) {
+      showAlert(err.message, true);
+      btn.disabled = false;
+      btn.textContent = 'Sign In';
+    }
+  }
+
+  async function handleRegister(e) {
+    e.preventDefault();
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const phone = document.getElementById('regPhone').value.trim();
+    const password = document.getElementById('regPassword').value;
+    const btn = document.getElementById('regSubmitBtn');
+
+    btn.disabled = true;
+    btn.textContent = 'Creating Account...';
+
+    try {
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, password })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Registration failed');
+      }
+
+      localStorage.setItem('ja_token', data.token);
+      localStorage.setItem('ja_user', JSON.stringify(data.user));
+
+      showAlert('Account created successfully! Redirecting...', false);
+
+      setTimeout(() => {
+        window.location.href = 'index.html?registered=true';
+      }, 700);
+
+    } catch (err) {
+      showAlert(err.message, true);
+      btn.disabled = false;
+      btn.textContent = 'Create User Account';
+    }
+  }
+
+  // If already logged in, show status
+  document.addEventListener('DOMContentLoaded', () => {
+    const userStr = localStorage.getItem('ja_user');
+    if (userStr) {
+      try {
+        const user = JSON.parse(userStr);
+        if (user.role === 'founder') {
+          showAlert(`You are already logged in as Founder (${user.name}). Redirecting to Admin Portal...`, false);
+          setTimeout(() => { window.location.href = 'admin.html'; }, 1000);
+        }
+      } catch (e) {}
+    }
+  });
+</script>
+</body>
+</html>
